@@ -1,0 +1,81 @@
+body{
+	background-image: url(C:/Users/Alexial/Desktop/side/check_list_to_do/image/space1.jpg);
+
+	background-size: cover;
+	background-attachment: fixed;
+}
+h1{
+	font-size: 100px;
+	color: white;
+}
+#pageForma{
+	margin-top: 50px;
+	border-radius: 20px;
+	height: 100;
+	width: 100;
+	background-color: RGBA(138,92,139,0.8)
+}
+#headerOne{
+	color: black;
+	font-size: 36px;
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bolder;
+}
+.linksStyle{
+	color:rgb(51, 51, 51);
+	font-size: 14px;
+}
+a{
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bolder;
+	color:black ;
+	font-size: 18px;
+}
+#button{
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bolder;
+	border-radius: 20px;
+	border:none ;
+	background:linear-gradient(90deg,RGBA(228,178,183,0.6),RGBA(78,104,181,0.6));
+}
+.form-control {
+	background:linear-gradient(90deg,RGBA(250,200,205,0.6),RGBA(150,156,240,0.6));
+	}
+
+.social{
+	height:48px;
+	width:48px;
+	border-radius: 24px;
+	background-size: cover;
+}
+
+.social.reddit{
+	background-image: url(image/Reddit-48.png);
+}
+
+.social.facebook{
+	background-image: url(image/Facebook-48.png);
+}
+
+.social.twitter{
+	background-image: url(image/Twitter-48.png);
+}
+
+#headerRestore{
+	font-size: 14px;
+	color:rgba(51, 51, 51,0.9);
+}
+
+.marginText{
+	margin:50px;
+}
+.marginText2{
+	margin:40px;
+}
+.headerTwo{
+	font-family: "Courier New", Courier, monospace;
+	text-align: center;
+	border-radius: 20px;
+}
+
+.tooltip-inner{white-space:pre;} /*сообщение в одну строчку*/
