@@ -51,12 +51,7 @@ function createCalendar(elem, year, month) {
       <th id = "monthSelection" colspan="5">`;
       table+= mon ;
       table+=`</th>
-      <div id="submenuMonth">
 
-      <a href="#" value="october">October</a>
-      <a href="#" value="november">November</a>
-      <a href="#" value="desember">December</a>
-      </div>
       </div>
 
       <th id="forwardButton" onclick="forwardButtonClick()"> > </th></tr>
@@ -116,7 +111,7 @@ function createCalendar(elem, year, month) {
     			nowYear += 1;
     			nowMonth = 1;
 			}
-			 createCalendar(calendar,nowYear, nowMonth);
+			 createCalendar(calendar_table,nowYear, nowMonth);
 	}
 
 	function backButtonClick(){
@@ -130,30 +125,79 @@ function createCalendar(elem, year, month) {
     			nowYear -= 1;
     			nowMonth = 11;
 			}
-			 createCalendar(calendar,nowYear, nowMonth);
+			 createCalendar(calendar_table,nowYear, nowMonth);
 	}
-    createCalendar(calendar,nowYear, nowMonth);
+    createCalendar(calendar_table,nowYear, nowMonth);
 	//backButton.addEventListener("click", backButtonClick);
 
-
 $(function(){
+
+		let calendar_notes = [];
+		function User_note(username, noteText, start_time, completion_time){
+			this.username = username;
+			this.noteText = noteText;
+			this.start_time = start_time;
+			this.completion_time = completion_time;
+		}
+
+		$(".notes_window").hide();
+		$('#calendar_notepad').hide();
 
 		$('th, td').on('mouseenter',function(){
 			$(this).css({'background':'rgba(0,0,0,0.4)','color':'white'});
 		});
 		$('th').on('mouseleave',function(){
 			$(this).css({'background':'rgba(0,0,0,0.2)','color':'black'});
+			if( ($(".SwitchOptionCosmoTheme").length != 0) || ($(".SwitchOptionDarkTheme").length != 0) ){
+				$(this).css({'background':'rgba(0,0,0,0.2)','color':'white'});
+			}
 		});
 		$('td').on('mouseleave',function(){
-				$(this).css({'background':'none','color':'black'});
+			$(this).css({'background':'none','color':'black'});
+			if( ($(".SwitchOptionCosmoTheme").length != 0) || ($(".SwitchOptionDarkTheme").length != 0) ){
+				$(this).css({'background':'none','color':'white'});
+			}
 		});
 
+		if( $(calendar_notes).length == 0){
+		$('#state_of_notes').html( 'нет заметок');
+		}
+		else{$('#state_of_notes').html(calendar_notes);}
 
-		$('#monthSelection').on('click',function(){
+		$('#add_notes').on('click',function(){
+			$('#calendar_table, .notes_window, .nav').hide();
+			$('#calendar_notepad').show();
+		});
+
+		$("#saving_notes").on("click", function(){
+			$('#calendar_table, .notes_window, .nav').show();
+			$('#calendar_notepad').hide();
+			calendar_notes.push(new User_note("John","fff","12","13"));
+			console.log(calendar_notes[0]);
+		});
+
+		`${$(this).attr('id')}HeaderOne`
+	/*	imageValues[0] = {
+    name: "LEGITIM",
+    link: "http://fozzyshop.com.ua/72653-thickbox_default/voda-mineralnaya-borjomi-evro-steklo.jpg",
+    rate: "5",
+    price:  "5$"
+}*/
+
+		$('td').on('click', function(){
+			$(".notes_window").show();
+			$("#selected_day").html($(this).html());
+			if( ($(this).attr("class")) == "active_notes_window"){
+				$(".notes_window").hide();
+			}
+			$(this).toggleClass('active_notes_window');
+		})
+
+
+
+	/*	$('#monthSelection').on('click',function(){
 			$('#submenuMonth').slideToggle(500);
-
-		});
-
+		}); */
 	/*	$('#forwardButton').on('click',function(){
 			let monthsArray= ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
 			//let ggg = $(monthSelection).html();
@@ -166,8 +210,7 @@ $(function(){
     			nowMonth = 1;
 			}
 			console.log ('ff');
-			 createCalendar(calendar,nowYear, nowMonth);
-
+			 createCalendar(calendar_table,nowYear, nowMonth);
 		});*/
 /*		$('#backButton').on('click',function(){
 
@@ -176,11 +219,8 @@ $(function(){
     			nowYear -= 1;
     			nowMonth = 11;
 			}
-			 createCalendar(calendar,nowYear, nowMonth);
-
-		});
-*/
-
+			 createCalendar(calendar_table,nowYear, nowMonth);
+		}); */
 		$('#add').on('click',function(){
 			let val=$('#inputString').val();
 			if(val !==''){
@@ -194,18 +234,10 @@ $(function(){
 			}
 		});
 
-		$('.azaza').on('click',function(){
-
-//
-		})
-
-
 		$('#buttonOk').on('click',function(){
 			let val=$('#inputStatus').val();
 			if(val.length <=56){
-
 				$('#status').html(val);
-
 			}
 			else{
 				alert ('слишком длинный статус');
@@ -219,7 +251,6 @@ $(function(){
 			$('.headerOne').toggleClass(`${$(this).attr('id')}HeaderOne`);
 			$('.headerTwo').toggleClass(`${$(this).attr('id')}HeaderTwo`);
 
-
 			if(($(".headerOneOrig").length !=0)||($(".textActive").length !=0)){
 				$('.headerOne').removeClass('headerOneOrig');
 				$('.headerTwo').removeClass('headerTwoOrig');
@@ -230,6 +261,12 @@ $(function(){
 				  $('.headerTwo').addClass('headerTwoOrig');
 				  $('#inputString').css('background-color','white');
 
+			}
+			if(($(this).attr('id') == 'SwitchOptionCosmo')&&($(".headerOneOrig").length ==0)){
+				$('.trajectoryOne, .trajectoryTwo, .trajectoryThree, .trajectoryFour').hide();
+			}
+			else{
+				$('.trajectoryOne, .trajectoryTwo, .trajectoryThree, .trajectoryFour').show();/*bubblesCondition.appendTo('body');*/
 			}
 		});
 

@@ -3,6 +3,115 @@ body{
 	font-family: "Courier New", Courier, monospace;
 	color:RGB(11,15,62);
 }
+
+.bubbles{
+position: absolute;
+left: 30%;
+top: 10%;
+/* offset-rotate: reverse; просто переворачивает объект на 180 градусов */
+}
+
+.trajectoryFour{
+	position: absolute;
+	left:10%;
+	bottom: 20%;
+	border : 1px solid rgba(255, 255, 255, 0.5);
+	box-shadow:inset 10px 10px 10px 10px rgba(255, 255, 255, 0.2);
+	border-radius:60px;
+	height:120px;
+	width:120px;
+	position: absolute;
+	animation: moveTrajectoryFour 40s linear infinite;
+	animation-play-state:paused;
+	offset-path:path("M 16.04 119.8 C -1.78 222.11 73.47 295.71 241.78 340.59 C 494.26 407.92 626.93 128.71 621.98 83.17 C 617.03 \
+		37.62 576.44 43.56 554.65 119.8 C 532.87 196.04 641.78 402.97 578.42 461.39 C 515.05 519.8 464.55 467.33 421.98 384.16 C\
+		 379.41 300.99 517.03 130.69 448.71 97.03 C 380.4 63.37 390.3 29.7 303.17 80.2 C 216.04 130.69 319.01 387.13 289.31 436.63\
+		  C 259.6 486.14 45.74 487.13 134.85 320 C 223.96 152.87 122.97 40.59 60.59 46.53 C 19.01 50.5 3.17 67.99 13.07 99.01 Z");
+}
+
+@keyframes moveTrajectoryFour{
+	100% {offset-distance: 100%;}
+}
+
+.trajectoryThree {
+	border : 1px solid rgba(255, 255, 255, 0.5);
+	box-shadow:inset 10px 10px 10px 10px rgba(255, 255, 255, 0.2);
+	border-radius:90px;
+	height:180px;
+	width:180px;
+	position: absolute;
+	top:20%;
+	offset-path:path("M 41.78 201.98 C 68.84 209.24 68.84 239.93 41.78 294.06 C 1.19 375.25 206.14 467.33 260.59 340.59\
+		     C 315.05 213.86 545.74 238.61 596.24 263.37 C 646.73 288.12 657.62 169.31 604.16 154.46 C 550.69 139.6 497.23 166.34 \
+		     467.52 304.95 C 437.82 443.56 338.81 422.77 287.33 453.47 C 235.84 484.16 92.28 440.59 128.91 340.59 C 165.54 240.59\
+		      299.21 264.36 312.08 217.82 C 324.95 171.29 260.59 96.04 132.87 96.04 Z");
+	animation: moveTrajectoryThree 40s linear infinite;
+
+	animation-play-state:paused;
+}
+@keyframes moveTrajectoryThree {
+	100% {offset-distance: 100%;}
+}
+
+.trajectoryOne{
+	border : 1px solid rgba(255, 255, 255, 0.5);
+	box-shadow:inset 10px 10px 10px 10px rgba(255, 255, 255, 0.2);
+	animation:moveTrajectoryOne 20s linear infinite reverse;
+
+	animation-play-state:paused;
+	offset-path: path("M 552.05 72.53 C 592.13 147.03 567.25 196.2 510.59 221.53 C 472.81 238.42 417.53 223.12 344.74 175.64 C 245.23\
+	 69.15 164.15 34.78 101.5 72.53 C 7.51 129.15 66.94 206.63 111.17 221.53 C 140.65 231.47 210.22 208.12 319.86 151.5 C 447.93 49.18\
+	  525.33 22.86 552.05 72.53 Z");
+	border-radius:100px;
+	height:200px;
+	width:200px;
+	position:absolute;
+	top:10%;
+}
+
+ @keyframes moveTrajectoryOne{
+ 	100% {offset-distance: 100%;}
+}
+.trajectoryTwo{
+	border : 1px solid rgba(255, 255, 255, 0.5);
+	box-shadow:inset 10px 10px 10px 10px rgba(255, 255, 255, 0.2);
+	animation:moveTrajectoryTwo 25s linear infinite  alternate;
+
+	animation-play-state:paused;
+	border-radius:70px;
+	height:140px;
+	width:140px;
+	offset-path: path("M 591.29 339.11 C 591.29 464.52 469.95 566.34 320.5 566.34 C 171.04 566.34 49.7 464.52 49.7 339.11 C 49.7\
+	 213.7 171.04 111.88 320.5 111.88 C 469.95 111.88 591.29 213.7 591.29 339.11 Z");
+}
+@keyframes moveTrajectoryTwo{
+	100% {offset-distance: 100%;}
+
+}
+/* .sfera{
+
+	border-radius:80px;
+	height:160px;
+	width:160px;
+	background-color:rgb(196,5,171);
+	color:#BE63F2;
+	border:2px dotted #BE63F2;
+	box-shadow:inset 8px 8px 6px 0px rgb(76,14,111),inset 9px 9px 2px white, inset -8px -8px 6px 0px rgb(76,14,111),inset 9px 9px 22px 0px rgb(76,14,111),inset -9px -9px 16px 0px rgb(76,14,111);inner and outer
+	position:relative;
+	margin-top:50px;
+	animation:sfera 6s linear 2s infinite reverse;
+
+}
+@keyframes sfera{
+	0% {background-color:rgb(196,5,171);}
+	15% {background-color:rgb(100, 90,180);}
+	30% {background-color:rgb(70,175,190);}
+	45% {background-color:rgb(55,225,222);}
+	60% {background-color:rgb(55 ,129, 228);}
+	75% {background-color:rgb(114,13,252);}
+	100% {background-color:rgb(172,10,204);}
+} */
+
 .SwitchOptionCosmoTheme{
 	background-image: url(C:/Users/Alexial/Desktop/side/check_list_to_do/image/space1.jpg);
 	opacity:0.9;
@@ -10,6 +119,7 @@ body{
 	color:white;
 	background-attachment: fixed;
 }
+
 #inputString{
 	border-radius: 18px;
 }
@@ -17,22 +127,26 @@ body{
 #add{
 	border-radius: 18px;
 }
+
 .buttonRemove{
 	border-radius: 18px;
 	margin-left: 10px;
 }
 
 .ThemeActiveNotExist{
-		color:RGB(11,15,62);
+	color:RGB(11,15,62);
 }
+
 .SwitchOptionDarkTheme{
 	background:linear-gradient(90deg,RGBA(0,0,0,1),RGBA(0,0,0,0.8));
 	color:RGB(200,200,200);
 }
+
 .SwitchOptionPinkTheme{
 	background:linear-gradient(90deg,RGBA(244,126,165,0.6),RGBA(78,104,181,0.6));
 	color:RGB(60,11,62);
 }
+
 .themeOriginal{
 	background:linear-gradient(90deg,RGBA(66,246,201,0.6),RGBA(78,104,181,0.6));
 	color:RGB(11,15,62);
@@ -97,11 +211,7 @@ body{
 	font-size: 28px;
 }
 
-.headerOne{
-}
-
 .headerOneOrig{
-
 	color:RGB(11,15,62);
 	font-size: 20px;
 	font-weight: normal;
@@ -118,18 +228,18 @@ body{
 
 #hint{
 	text-align: center;
-
 }
-#buttonOk{
 
+#buttonOk{
 	width: 40px;
 	height: 28px;
 	border-radius: 17px;
 }
-#inputStatus{
 
+#inputStatus{
 	border-radius: 17px;
 }
+
 .material-switch > input[type="checkbox"] {
     display: none;
 }
@@ -175,21 +285,24 @@ body{
     background: inherit;
     left: 20px;
 }
+
 .inline{
 	 display: inline;
-	}
+}
+
 .formUp{
 	margin-top: -27px;
 }
+
  table {
       border-collapse: collapse;
-    }
+}
 
 td, th {
       border: 1px solid black;
       padding: 3px;
       text-align: center;
-    }
+}
 
 th {
       font-weight: bold;
@@ -201,23 +314,24 @@ background:black;
 
 #monthSelection {
 background-color:rgba(0,0,0,0.2);/* rgba(220,220,220,0.6);*/
-
 padding: 16px;
 font-size: 16px;
 border: 1px solid black;
 cursor: pointer;
 }
+
 #monthSelection:hover, #monthSelection:focus {
 background-color:rgba(0,0,0,0.2);/*rgba(220,220,220,0.4);*/
 }
+
 .menu {
 position: relative;
 display: inline-block;
 }
-#submenuMonth {
+/* #submenuMonth {
 display: none;
 position: fixed;
-background-color :rgba(93,132,138,1);/*rgba(220,220,220,1);*/
+background-color :rgba(93,132,138,1);rgba(220,220,220,1);
 min-width: 160px;
 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
@@ -229,11 +343,52 @@ text-decoration: none;
 display: block;
 }
 #submenuMonth a:hover {
-background-color:rgba(0,0,0,0.2);/*rgba(240,240,240,1);*/
+background-color:rgba(0,0,0,0.2);rgba(240,240,240,1);
+} */
+.table {
+	background:rgba(0,0,0,0.2);rgba(255, 255, 255, 0.2);
 }
-table {
-	background:rgba(0,0,0,0.2);/* rgba(255, 255, 255, 0.2);*/
-}
+
 #backButton,#forwardButton{
 	border-top: 1px solid black;
+}
+
+.notes_window{
+	border-radius: 20px;
+	background-color:rgba(0,0,0,0.2);
+	width:100%;
+	padding-top:2%;
+	padding-bottom:2%;
+	color:white;
+}
+
+#add_notes{
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	margin-left: 85%;
+	/* margin-top: 1%; */
+}
+
+#selected_day{
+	text-align: left;
+	margin-left: 3%;
+}
+
+#calendar_notepad{
+	border-radius: 1%;
+	margin-top: 10%;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.6);
+	padding-top: 8%;
+	padding-bottom:8%;
+}
+#calendar_note_text{
+
+	/* width:90%;
+	margin:5%; */
+}
+.p_input{
+	display: inline;
+	/* text-align: left; */
 }
