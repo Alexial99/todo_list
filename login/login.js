@@ -1,6 +1,8 @@
 "use strict";
 function clickRegister(){
-	$('#registerField').html(`<div class="form-group"><label for="InputPassword2">Password</label>
+	$('#registerField').html(`
+		<div class="form-group">
+		<label for="InputPassword2">Password</label>
 		<input type="password" name='passTwo' class="form-control" id="InputPassword2" placeholder="Password"></div>`);
 
 };

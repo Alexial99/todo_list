@@ -169,11 +169,17 @@ $(function(){
 			$('#calendar_notepad').show();
 		});
 
+		$('form').submit(function() {
+			console.log($(this).serializeArray());
+			calendar_notes.push(new User_note("John",$(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
+			console.log(calendar_notes[0]);
+			//console.log($(this).serializeArray()[0]);
+			return false;
+		});
+
 		$("#saving_notes").on("click", function(){
 			$('#calendar_table, .notes_window, .nav').show();
 			$('#calendar_notepad').hide();
-			calendar_notes.push(new User_note("John","fff","12","13"));
-			console.log(calendar_notes[0]);
 		});
 
 		`${$(this).attr('id')}HeaderOne`
