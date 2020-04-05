@@ -132,12 +132,12 @@ function createCalendar(elem, year, month) {
 
 $(function(){
 
-		let calendar_notes = [];
-		function User_note(username, noteText, start_time, completion_time){
+		let CalendarNotes = [];
+		function userNote(username, noteText, startTime, completionTime){
 			this.username = username;
 			this.noteText = noteText;
-			this.start_time = start_time;
-			this.completion_time = completion_time;
+			this.startTime = startTime;
+			this.completionTime = completionTime;
 		}
 
 		$(".notes_window").hide();
@@ -159,10 +159,10 @@ $(function(){
 			}
 		});
 
-		if( $(calendar_notes).length == 0){
+		if( $(CalendarNotes).length == 0){
 		$('#state_of_notes').html( 'нет заметок');
 		}
-		else{$('#state_of_notes').html(calendar_notes);}
+		else{$('#state_of_notes').html(CalendarNotes);}
 
 		$('#add_notes').on('click',function(){
 			$('#calendar_table, .notes_window, .nav').hide();
@@ -171,8 +171,8 @@ $(function(){
 
 		$('form').submit(function() {
 			console.log($(this).serializeArray());
-			calendar_notes.push(new User_note("John",$(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
-			console.log(calendar_notes[0]);
+			CalendarNotes.push(new userNote("John",$(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
+			console.log(CalendarNotes[0]);
 			//console.log($(this).serializeArray()[0]);
 			return false;
 		});
