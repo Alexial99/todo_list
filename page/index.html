@@ -136,6 +136,7 @@
                 <div class="notes_window">
                     <div id="selected_day" ></div>
                     <div id="state_of_notes"></div>
+                    <button id="removeNotes">remove notes</button>
                     <button id="add_notes" >+</button>
                 </div>
 
@@ -147,7 +148,7 @@
 
             <div  class=" col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
               <div id="calendar_notepad">
-               <p> Новая заметка</p>
+              <p> Новая заметка</p>
                 <form  id="myForm" class="form-horizontal">
                   <div class="form-group">
                     <label for="calendar_note_text" class="col-sm-1 control-label">T</label>
@@ -161,7 +162,7 @@
                       <p class="form-control-static p_input" >Начало</p>
                     </div>
                     <div class="col-sm-8 col-lg-3 col-lg-offset-5">
-                    <input type="date" name='startTime'>
+                    <input type="date" name='startTime' >
                     </div><br/>
                     <div class="col-sm-2">
                       <p class="form-control-static p_input" >Конец</p>
@@ -174,6 +175,12 @@
 
                   <button type="submit" id="saving_notes" class="btn btn-default">готово</button>
                 </form>
+              </div>
+            </div>
+
+            <div  class=" col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+              <div id='notepadToDelete'><div id="objectsToDelit"></div>
+                <button id="buttonForCloseNotepadToDelite">ok</button>
               </div>
             </div>
 

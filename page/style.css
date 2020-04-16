@@ -392,3 +392,10 @@ background-color:rgba(0,0,0,0.2);rgba(240,240,240,1);
 	display: inline;
 	/* text-align: left; */
 }
+.js-notes-for-delite{
+	margin:20px;
+	background-color: pink;
+}
+.js-notes-text{
+	margin:20px;
+}

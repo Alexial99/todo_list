@@ -48,7 +48,12 @@ function createCalendar(elem, year, month) {
 
 
 	  <div class="menu">
-      <th id = "monthSelection" colspan="5">`;
+      <th id = "monthSelection" colspan="5" month ="`
+      if(nowMonth<9){table+=0;}
+      table+= nowMonth+1;
+      table+=`" year="`;
+      table+= nowYear;
+      table+=`">`;
       table+= mon ;
       table+=`</th>
 
@@ -75,7 +80,6 @@ function createCalendar(elem, year, month) {
 
         d.setDate(d.getDate() + 1);
       }
-
       // добить таблицу пустыми ячейками, если нужно
       // 29 30 31 * * * *
       if (getDay(d) != 0) {
@@ -83,7 +87,6 @@ function createCalendar(elem, year, month) {
           table += '<td></td>';
         }
       }
-
       // закрыть таблицу
       table += '</tr></table>';
 
@@ -112,6 +115,7 @@ function createCalendar(elem, year, month) {
     			nowMonth = 1;
 			}
 			 createCalendar(calendar_table,nowYear, nowMonth);
+			 lalalal();
 	}
 
 	function backButtonClick(){
@@ -126,26 +130,45 @@ function createCalendar(elem, year, month) {
     			nowMonth = 11;
 			}
 			 createCalendar(calendar_table,nowYear, nowMonth);
+			 lalalal();
 	}
     createCalendar(calendar_table,nowYear, nowMonth);
 	//backButton.addEventListener("click", backButtonClick);
-
-$(function(){
-
-		let CalendarNotes = [];
-		function userNote(username, noteText, startTime, completionTime){
+	//console.log(monthSelection);
+let CalendarNotes = [];
+		function userNote(username, dateAdd, noteText, startTime, completionTime){
 			this.username = username;
+			this.dateAdd = dateAdd;
 			this.noteText = noteText;
 			this.startTime = startTime;
 			this.completionTime = completionTime;
 		}
 
+	function lalalal(){
+$(function(){
+		/*let CalendarNotes = [];
+		function userNote(username, dateAdd, noteText, startTime, completionTime){
+			this.username = username;
+			this.dateAdd = dateAdd;
+			this.noteText = noteText;
+			this.startTime = startTime;
+			this.completionTime = completionTime;
+		}*/
+		if( $(CalendarNotes).length == 0){
+		$('#state_of_notes').html( 'нет заметок');
+		}
+
+		$("#removeNotes").hide();
 		$(".notes_window").hide();
 		$('#calendar_notepad').hide();
+		$('#notepadToDelete').hide();
 
-		$('th, td').on('mouseenter',function(){
+
+
+	$('th, td').on('mouseenter',function (){
 			$(this).css({'background':'rgba(0,0,0,0.4)','color':'white'});
 		});
+
 		$('th').on('mouseleave',function(){
 			$(this).css({'background':'rgba(0,0,0,0.2)','color':'black'});
 			if( ($(".SwitchOptionCosmoTheme").length != 0) || ($(".SwitchOptionDarkTheme").length != 0) ){
@@ -159,65 +182,173 @@ $(function(){
 			}
 		});
 
-		if( $(CalendarNotes).length == 0){
-		$('#state_of_notes').html( 'нет заметок');
-		}
-		else{$('#state_of_notes').html(CalendarNotes);}
 
-		$('#add_notes').on('click',function(){
-			$('#calendar_table, .notes_window, .nav').hide();
-			$('#calendar_notepad').show();
+
+		$('td').on('click', function(){
+			$(".notes_window").show();
+			let today =$(this).children().html();
+			if( today <10){today="0"+today;}
+
+		//	console.log($(this).children().html());
+			$("#selected_day").html(today+"."+$('#monthSelection').attr('month')+"."+$('#monthSelection').attr('year'));
+
+			if($('#state_of_notes').html()!="нет заметок"){
+				$('#state_of_notes').html("");
+			}
+
+			$.each(CalendarNotes,function(index,element){
+				let dateAddThisNote;
+				$.each(this,function(key,value){
+
+					if(key=='dateAdd'){
+						dateAddThisNote = value;
+					}
+
+						if(key=='startTime'){
+
+						let noteTextValue =  element.noteText.value;
+
+						let date1=element.startTime.value;
+						if(this.value ==""){
+								date1=(dateAddThisNote);
+								date1= (new Date(date1).getFullYear()+"."+((new Date(date1).getDate()))+"."+((new Date(date1).getMonth())+1));
+						}
+
+						let date2=element.completionTime.value;
+						if(element.completionTime.value==""){
+								date2=(dateAddThisNote);
+								date2= (new Date(date2).getFullYear()+"."+((new Date(date2).getDate()))+"."+((new Date(date2).getMonth())+1));
+						}
+
+						let daysLong = Math.ceil((Date.parse(date2) - Date.parse(date1)) / (1000 * 3600 * 24));
+						if(daysLong<0){
+							let date3=date1;
+							date1=date2;
+							date2=date3;
+						}
+
+						let dateStart = new Date(date1);
+						let dateEnd = new Date(date2);
+						let arrayInterval = [];
+
+						function pad(s){ return ('00' + s).slice(-2)}
+
+						while( dateStart.getTime() <= dateEnd.getTime()) {
+									  arrayInterval.push( '' + pad(dateStart.getDate()) +'.'+ pad(dateStart.getMonth()+1) +'.'+ dateStart.getFullYear() );
+									  dateStart.setDate(dateStart.getDate()+1);
+						}
+
+						$.each(arrayInterval,function(index,element){
+							if(element == $('#selected_day').html()){
+								if($('#state_of_notes').html()=="нет заметок"){
+									$('#state_of_notes').html(noteTextValue+"<br>");
+									//console.log(element.noteText.value);
+									$('#state_of_notes').css( {'overflow':'auto','height':'60px','padding':'10px'});
+								}
+								else{
+									$('#state_of_notes').append( noteTextValue+"<br>");
+								}
+							}
+						});
+					}
+				});
+			});
+
+
+			if($('#state_of_notes').html()==""){
+				$('#state_of_notes').html("нет заметок");
+				$('#removeNotes').hide();
+				$('#state_of_notes').css( {'height':'','padding':''});
+			}
+
+			if( ($(this).attr("class")) == "active_notes_window"){
+				$(".notes_window").hide();
+			}
+
+			$(this).toggleClass('active_notes_window');
+
+			if ($('#state_of_notes').html()!="нет заметок"){
+				$('#removeNotes').show();
+			}
+
 		});
 
+
+
+});
+
+}
+lalalal();
+
+
+$(function(){
+
+			$('#add_notes').on('click',function(){
+			$('#calendar_table, .notes_window, .nav').hide();
+			$('#calendar_notepad').show();
+			$('td').removeClass('active_notes_window');
+		});
+
+
 		$('form').submit(function() {
-			console.log($(this).serializeArray());
-			CalendarNotes.push(new userNote("John",$(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
-			console.log(CalendarNotes[0]);
+			//console.log($(this).serializeArray());
+			//console.log($('#selected_day').html())
+			CalendarNotes.push(new userNote("John",$('#selected_day').html(),$(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
+			//console.log(CalendarNotes[0]);
 			//console.log($(this).serializeArray()[0]);
+			$('#calendar_note_text').val('');
+			$("[name='startTime']").val('');
+			$("[name='completionTime']").val('');
+			//console.log($(CalendarNotes[0]));
 			return false;
 		});
 
 		$("#saving_notes").on("click", function(){
-			$('#calendar_table, .notes_window, .nav').show();
+			$('#calendar_table, .nav').show();//.notes_window,
 			$('#calendar_notepad').hide();
 		});
 
-		`${$(this).attr('id')}HeaderOne`
-	/*	imageValues[0] = {
-    name: "LEGITIM",
-    link: "http://fozzyshop.com.ua/72653-thickbox_default/voda-mineralnaya-borjomi-evro-steklo.jpg",
-    rate: "5",
-    price:  "5$"
-}*/
+					//`${$(this).attr('id')}HeaderOne`  ?
+				/*	imageValues[0] = {
+			    name: "LEGITIM",
+			    link: "http://fozzyshop.com.ua/72653-thickbox_default/voda-mineralnaya-borjomi-evro-steklo.jpg",
+			    rate: "5",
+			    price:  "5$"
+			}*/
 
-		$('td').on('click', function(){
-			$(".notes_window").show();
-			$("#selected_day").html($(this).html());
-			if( ($(this).attr("class")) == "active_notes_window"){
-				$(".notes_window").hide();
-			}
-			$(this).toggleClass('active_notes_window');
-		})
+	$('#removeNotes').on('click',function(){
+			$('#calendar_table, .notes_window, .nav').hide();
+			$('#notepadToDelete').show();
+			$.each(CalendarNotes,function (index,element){
+				$.each(this,function(key,value){
+					if(key =='dateAdd'){
+						if(value == $('#selected_day').html()){
+							$('#objectsToDelit').append( "<div class='js-notes-for-delite'>"+value+"<div class='js-notes-text'>"+ element.noteText.value+"</div>"+'<button class="removeThisNote" direction="'+index+'"></button>'+"</div>");
 
+						}
+					}
+				});
 
+			});
+			$('.removeThisNote').on('click',function(){
+			//console.log($(this).attr('direction'));
+			//console.log(CalendarNotes[$(this).attr('direction')]);
+			CalendarNotes.splice([$(this).attr('direction')],1);
+			$('#objectsToDelit').html("");
+			$('#removeNotes').click();
+			//console.log($(CalendarNotes));
+			});
+		});
 
+		$('#buttonForCloseNotepadToDelite').on('click',function(){
+			$('#objectsToDelit').html("");
+			$('#calendar_table, .nav').show();//.notes_window,
+			$('#notepadToDelete').hide();
+			$('td').removeClass('active_notes_window');
+		});
 	/*	$('#monthSelection').on('click',function(){
 			$('#submenuMonth').slideToggle(500);
 		}); */
-	/*	$('#forwardButton').on('click',function(){
-			let monthsArray= ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
-			//let ggg = $(monthSelection).html();
-			if( monthsArray.indexOf($(monthSelection).html())){
-				nowMonth= monthsArray.indexOf($(monthSelection).html());
-			}
-    		nowMonth += 1;
-    		if(nowMonth==12){
-    			nowYear += 1;
-    			nowMonth = 1;
-			}
-			console.log ('ff');
-			 createCalendar(calendar_table,nowYear, nowMonth);
-		});*/
 /*		$('#backButton').on('click',function(){
 
     		nowMonth -= 1;
@@ -276,73 +407,6 @@ $(function(){
 			}
 		});
 
-
-		/*$('#SwitchOptionCosmo').on('click',function(id){
-			$('body').toggleClass('themeCosmo');
-			$('.headerOne').toggleClass('cosmoHeaderOne');
-			$('.headerTwo').toggleClass('cosmoHeaderTwo');
-
-
-			if($(".headerOneOrig").length !=0){
-				$('.headerOne').removeClass('headerOneOrig');
-				$('.headerTwo').removeClass('headerTwoOrig');
-				$('#inputString').css('background-color','black');
-			}
-			else {											//if($(".themeDark").length == 0) {
-				  $('.headerOne').addClass('headerOneOrig');
-				  $('.headerTwo').addClass('headerTwoOrig');
-				  $('#inputString').css('background-color','white');
-
-			}
-		});
-
-		$('#SwitchOptionPink').on('click',function(){
-			if($(".themeCosmo").length !=0){
-					//let h =getComputedStyle("div.material-switch.label",'::before' );
-					//document.querySelector('::after').appendChild(document.createTextNode( `\t${h.content}` ));
-//$('div.material-switch.label').css('input[type="checkbox"]','checked + label::before { background: inherit;opacity: 0.5;}');
-			}
-
-			$('body').toggleClass('themePink');
-			$('.headerOne').toggleClass('pinkHeaderOne');
-			$('.headerTwo').toggleClass('pinkHeaderTwo');
-			if($(".headerOneOrig").length !=0){
-				$('.headerOne').removeClass('headerOneOrig');
-				$('.headerTwo').removeClass('headerTwoOrig');
-			}
-			else {											//if($(".themeDark").length == 0) {
-				  $('.headerOne').addClass('headerOneOrig');
-				  $('.headerTwo').addClass('headerTwoOrig');
-			}
-		});
-
-		$('#SwitchOptionDark').on('click',function(){
-
-			$('body').toggleClass('themeDark');
-			$('.headerOne').toggleClass('darkHeaderOne');
-			$('.headerTwo').toggleClass('darkHeaderTwo');
-			if($(".headerOneOrig").length !=0){
-				$('.headerOne').removeClass('headerOneOrig');
-				$('.headerTwo').removeClass('headerTwoOrig');
-			}
-			else {											//if($(".themeDark").length == 0) {
-				  $('.headerOne').addClass('headerOneOrig');
-				  $('.headerTwo').addClass('headerTwoOrig');
-			}
-		});*/
-
-		/*$('#').on('click',function(id){
-
-			if(($(".headerOne").css('font-size')) == '32px'){
-				$('.headerOne').css('font-size','20px');
-				$('.headerTwo').css("font-size","18px");
-			}
-			else {											//if($(".themeDark").length == 0) {
-				 $('.headerOne').css("font-size","32px");
-				 $('.headerTwo').css("font-size","28px");
-			}
-		});*/
-
 		$('.switchText').on('click',function(id){
 
 			$(this).toggleClass('textActive');
@@ -358,33 +422,10 @@ $(function(){
 				$('.headerOne').toggleClass('ThemeActiveNotExist');
 			}
 
-			/*if(($(".headerOne").css('font-size')) == '32px'){
-				$('.headerOne').removeClass('boldtext');
-				$('.headerOne').addClass('headerOneOrig'); //css({'font-size':'20px','font-weight': 'normal'});
-				$('.headerTwo').addClass('headerTwoOrig');//css({'font-size':'18px','font-weight': 'normal'});
-			}
-			else {											//if($(".themeDark").length == 0) {
-				 $('.headerOne').addClass('boldtext ');//css({'font-size':'32px','font-weight': 'bold'});
-				 $('.headerTwo').addClass('boldtext ');//css({'font-size':'28px','font-weight': 'bold'});
-			}*/
-		});
 
-		/*$('#SwitchSmallText').on('click',function(id){
-
-			if(($(".headerOne").css('font-size')) == '14px'){
-				$('.headerOne').css('font-size','20px');
-				$('.headerTwo').css("font-size","18px");
-			}
-			else {											//if($(".themeDark").length == 0) {
-				 $('.headerOne').css("font-size","14px");
-				 $('.headerTwo').css("font-size","12px");
-			}
 		});
-*/
 		if($(".themeDark").length == 0) {
 				  $('.headerOne').addClass('headerOneOrig');
 				  $('.headerTwo').addClass('headerTwoOrig');
 			}
-
-
-});
+	});
