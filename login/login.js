@@ -4,6 +4,7 @@ function clickRegister(){
 		<div class="form-group">
 		<label for="InputPassword2">Password</label>
 		<input type="password" name='passTwo' class="form-control" id="InputPassword2" placeholder="Password"></div>`);
+	lol();
 
 };
 function clickRestore(){
@@ -19,18 +20,19 @@ function clickRestore(){
 			LOGIN</button>`)
 	$('#headerRestore').hide();
 	$('#headerOne').hide();
-}
-
-$(function() {
+};
 
 	let UsersData = [];
-		function userData(username, userPassword){
+		function userData(username, userPassword,userPasswordTwo){
 			this.username = username;
 			this.userPassword = userPassword;
+			this.userPasswordTwo = userPasswordTwo;
 		}
+$(function() {
 
 
-	$('form').submit(function() {
+
+	/*$('form').submit(function() {
 			console.log($(this).serializeArray());
 
 			if($(this).serializeArray().length == 2){
@@ -53,8 +55,8 @@ $(function() {
 			console.log(calendar_notes[0]);
 			//console.log($(this).serializeArray()[0]);*/
 
-			return false;
-		});
+	//		return false;
+	//	});*/
 
 	var app = {
 
@@ -134,5 +136,69 @@ $(function() {
 	}
 
 	app.initialize();
+	lal();
 
 });
+function lol(){
+	$(function(){
+	$('form').submit(function(){
+			 if ( $(this).serializeArray().length == 3){
+				alert("3 формы");
+				console.log($(this).serializeArray()[2]);
+				if($(this).serializeArray()[1].value == $(this).serializeArray()[2].value){
+					UsersData.push(new userData($(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
+					console.log(UsersData[0]);
+				}
+				else{alert("не верно");}
+			}
+
+	});
+});
+};
+function lal(){
+$(function(){
+	$('form').submit(function() {
+			console.log($(this).serializeArray());
+
+			if($(this).serializeArray().length == 2){
+				alert("2 формы");
+				UsersData.push(new userData($(this).serializeArray()[0],$(this).serializeArray()[1]));
+				console.log(UsersData[0]);
+			}
+		/*	else if ( $(this).serializeArray().length == 3){
+				alert("3 формы");
+				console.log($(this).serializeArray()[2]);
+				if($(this).serializeArray()[1].value == $(this).serializeArray()[2].value){
+					UsersData.push(new userData($(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
+					console.log(UsersData[0]);
+				}
+				else{alert("не верно");}
+*/
+		//	}
+			if(($(this).serializeArray().length !== 2)&&($(this).serializeArray().length !== 3)){alert("на почту выслано ничего");
+			//	console.log($(this).serializeArray()[0]);
+				let email = $(this).serializeArray()[0].value;
+			//	console.log(typeof email);
+
+
+				$.each(UsersData,function(index,element){
+					$.each(this,function(key,value){
+						//console.log(key);
+						if((key ==='username')&&(value.value===email)){
+							//console.log(value.value);
+							//if(value===email){
+							console.log('сообщение высла');
+						}
+						//}
+					});
+				});
+			}
+
+			/*calendar_notes.push(new User_note("John",$(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
+			console.log(calendar_notes[0]);
+			//console.log($(this).serializeArray()[0]);*/
+
+			return false;
+		});
+});
+};

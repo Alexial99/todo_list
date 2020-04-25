@@ -207,17 +207,24 @@ $(function(){
 						if(key=='startTime'){
 
 						let noteTextValue =  element.noteText.value;
+						console.log(noteTextValue);
+						console.log(dateAddThisNote);
 
 						let date1=element.startTime.value;
 						if(this.value ==""){
 								date1=(dateAddThisNote);
-								date1= (new Date(date1).getFullYear()+"."+((new Date(date1).getDate()))+"."+((new Date(date1).getMonth())+1));
+								date1=dateCorrection(date1);
 						}
 
 						let date2=element.completionTime.value;
 						if(element.completionTime.value==""){
 								date2=(dateAddThisNote);
-								date2= (new Date(date2).getFullYear()+"."+((new Date(date2).getDate()))+"."+((new Date(date2).getMonth())+1));
+								date2=dateCorrection(date2);
+						}
+						function dateCorrection(time){
+							let arrDate =time.split(".");
+							let result = arrDate[2]+"."+ ((arrDate[1]))+"."+ arrDate[0];
+							return result;
 						}
 
 						let daysLong = Math.ceil((Date.parse(date2) - Date.parse(date1)) / (1000 * 3600 * 24));
@@ -225,19 +232,24 @@ $(function(){
 							let date3=date1;
 							date1=date2;
 							date2=date3;
+							if (((new Date(date2)).getHours())!=((new Date(date1)).getHours())){
+								date2=(new Date(date2)).getTime()+((new Date(date1)).getHours()*3600000);
+							}
 						}
 
 						let dateStart = new Date(date1);
-						let dateEnd = new Date(date2);
+						console.log(dateStart);
+						let dateEnd =new Date(date2);//гдет пребавляютс 3 часа...я хз где..но эт фикс обратного отсчета
+						console.log(dateEnd);
 						let arrayInterval = [];
 
 						function pad(s){ return ('00' + s).slice(-2)}
 
 						while( dateStart.getTime() <= dateEnd.getTime()) {
-									  arrayInterval.push( '' + pad(dateStart.getDate()) +'.'+ pad(dateStart.getMonth()+1) +'.'+ dateStart.getFullYear() );
+									  arrayInterval.push( '' + pad(dateStart.getDate()) +'.'+  pad(dateStart.getMonth()+1) +'.'+ dateStart.getFullYear() );
 									  dateStart.setDate(dateStart.getDate()+1);
 						}
-
+						console.log(arrayInterval);
 						$.each(arrayInterval,function(index,element){
 							if(element == $('#selected_day').html()){
 								if($('#state_of_notes').html()=="нет заметок"){
@@ -292,14 +304,14 @@ $(function(){
 
 		$('form').submit(function() {
 			//console.log($(this).serializeArray());
-			//console.log($('#selected_day').html())
+			console.log($('#selected_day').html())
 			CalendarNotes.push(new userNote("John",$('#selected_day').html(),$(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
-			//console.log(CalendarNotes[0]);
-			//console.log($(this).serializeArray()[0]);
+			console.log(CalendarNotes[1]);
+			console.log($(this).serializeArray()[1]);
 			$('#calendar_note_text').val('');
 			$("[name='startTime']").val('');
 			$("[name='completionTime']").val('');
-			//console.log($(CalendarNotes[0]));
+			console.log($(CalendarNotes[1]));
 			return false;
 		});
 
@@ -316,14 +328,14 @@ $(function(){
 			    price:  "5$"
 			}*/
 
-	$('#removeNotes').on('click',function(){
+		$('#removeNotes').on('click',function(){
 			$('#calendar_table, .notes_window, .nav').hide();
 			$('#notepadToDelete').show();
 			$.each(CalendarNotes,function (index,element){
 				$.each(this,function(key,value){
 					if(key =='dateAdd'){
 						if(value == $('#selected_day').html()){
-							$('#objectsToDelit').append( "<div class='js-notes-for-delite'>"+value+"<div class='js-notes-text'>"+ element.noteText.value+"</div>"+'<button class="removeThisNote" direction="'+index+'"></button>'+"</div>");
+							$('#objectsToDelit').append( "<div class='js-notes-for-delite'>"+value+"<div class='js-notes-text'>"+ element.noteText.value+"</div>"+'<button class="removeThisNote" direction="'+index+'"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+"</div>");
 
 						}
 					}
@@ -366,7 +378,7 @@ $(function(){
 				$('#mylist').append(elem);
 				$('input').val('');
 				$('.buttonRemove').on('click',function(){
-					$(this).parent(). remove();
+					$(this).parent().remove();
 				});
 			}
 		});
