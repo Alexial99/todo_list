@@ -22,7 +22,7 @@ top: 10%;
 	width:120px;
 	position: absolute;
 	animation: moveTrajectoryFour 40s linear infinite;
-	animation-play-state:paused;
+	 animation-play-state:paused;
 	offset-path:path("M 16.04 119.8 C -1.78 222.11 73.47 295.71 241.78 340.59 C 494.26 407.92 626.93 128.71 621.98 83.17 C 617.03 \
 		37.62 576.44 43.56 554.65 119.8 C 532.87 196.04 641.78 402.97 578.42 461.39 C 515.05 519.8 464.55 467.33 421.98 384.16 C\
 		 379.41 300.99 517.03 130.69 448.71 97.03 C 380.4 63.37 390.3 29.7 303.17 80.2 C 216.04 130.69 319.01 387.13 289.31 436.63\
@@ -47,7 +47,7 @@ top: 10%;
 		      299.21 264.36 312.08 217.82 C 324.95 171.29 260.59 96.04 132.87 96.04 Z");
 	animation: moveTrajectoryThree 40s linear infinite;
 
-	animation-play-state:paused;
+	 animation-play-state:paused;
 }
 @keyframes moveTrajectoryThree {
 	100% {offset-distance: 100%;}
@@ -77,7 +77,7 @@ top: 10%;
 	box-shadow:inset 10px 10px 10px 10px rgba(255, 255, 255, 0.2);
 	animation:moveTrajectoryTwo 25s linear infinite  alternate;
 
-	animation-play-state:paused;
+	 animation-play-state:paused;
 	border-radius:70px;
 	height:140px;
 	width:140px;
@@ -113,7 +113,7 @@ top: 10%;
 } */
 
 .SwitchOptionCosmoTheme{
-	background-image: url(C:/Users/Alexial/Desktop/side/check_list_to_do/image/space1.jpg);
+	background-image: url(../image/space1.jpg);
 	opacity:0.9;
 	background-size: cover;
 	color:white;
@@ -366,7 +366,7 @@ background-color:rgba(0,0,0,0.2);rgba(240,240,240,1);
 	width: 40px;
 	height: 40px;
 	border-radius: 20px;
-	margin-left: 85%;
+	margin-left: 90%;
 	color:black;
 	background-color: rgba(255, 255, 255,0.5);
 
@@ -409,20 +409,28 @@ background-color:rgba(0,0,0,0.2);rgba(240,240,240,1);
 	border-radius: 10px;
 	color:black;
 	padding:1%;
-	padding-bottom: 2%;
+	padding-bottom: 1%;
 	background-color: rgba(255, 255, 255,0.5);
 }
 .removeThisNote{
 	border-radius: 50%;
-	padding-top:4px;
+	width: 30px;
+	height: 30px;
+	padding: 4px;
+	padding-top:5px;
+	padding-right:4px;
+	/* padding-top:4px; */
 	background-color: rgba(255, 255, 255,0.5);
-	color:black;
+	color:rgba(0, 0, 0, 0.6);
 }
 #buttonForCloseNotepadToDelite{
-	border-radius:8px;
-	width:40px;
-	height: 30px;
+	border-radius:10px;
+	margin-left: 20px;
+	width:60px;
+	height: 40px;
 	text-align: center;
+	font-size: 22px;
+
 	background-color: rgba(255, 255, 255,0.5);
 	color:black;
 }
