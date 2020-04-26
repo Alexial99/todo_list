@@ -1,5 +1,5 @@
 body{
-	background-image: url(../image/space1.jpg);
+	background-image: url(../../image/space1.jpg);
 
 	background-size: cover;
 	background-attachment: fixed;
@@ -30,7 +30,6 @@ a{
 	font-weight: bolder;
 	color:black ;
 	font-size: 18px;
-	text-decoration: none;
 }
 #button{
 	font-family: "Courier New", Courier, monospace;

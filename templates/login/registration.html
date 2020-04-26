@@ -1,76 +1,90 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-	 <script src ="C:\Users\Alexial\Desktop\side\jquery341.js">
-	 </script>
-	<script src ="C:\Users\Alexial\Desktop\side\js\bootstrap.min.js">
-	</script>
+<head>
+    {% load static %}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>registration</title>
 
-    <link href="C:\Users\Alexial\Desktop\side\css\bootstrap.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-	<style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	   input[type="email"]::-webkit-input-placeholder { color: rgba(20, 20, 20, 0.9); }
-	   input[type="password"]::-webkit-input-placeholder { color: rgba(20, 20, 20, 0.9); }
+    <link href="{% static 'css/login/style.css' %}" rel="stylesheet">
+    <style>
 
-	 </style>
+        input[type="email"]::-webkit-input-placeholder {
+            color: rgba(20, 20, 20, 0.9);
+        }
 
-  </head>
-  <body >
+        input[type="password"]::-webkit-input-placeholder {
+            color: rgba(20, 20, 20, 0.9);
+        }
 
-		<div class="container">
-		 	<div class=" col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 " id='pageForma'>
+    </style>
 
-		 		<div align='center' class="marginText2" id='headerOne'> Login </div>
+</head>
+<body>
 
-				<form id="form_registration" onsubmit="return false">
-				  <div class="form-group">
-				    <label for="InputEmail">Email address</label>
-				    <input type="email" name='email' class="form-control" id="InputEmail1" placeholder="Email">
-				  </div>
-				  <div class="form-group">
-				    <label for="InputPassword1">Password</label>
-				    <input type="password" name='pass' class="form-control" id="InputPassword1" placeholder="Password">
-				  </div>
+<div class="container">
+    <div class=" col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 " id='pageForma'>
+
+        <div align='center' class="marginText2" id='headerOne'> Login</div>
+
+        <form id="form_registration" onsubmit="return false">
+            <div class="form-group">
+                <label for="InputEmail">Email address</label>
+                <input type="email" name='email' class="form-control" id="InputEmail1" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="InputPassword1">Password</label>
+                <input type="password" name='pass' class="form-control" id="InputPassword1" placeholder="Password">
+            </div>
 
 				  <p onclick="clickRegister()"   class="marginText2" align='center'><a>register</a></p>
 				  <div id="registerField"></div>
 
-				  <button type="submit"  id="button"  class=" col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 btn btn-default" >LOGIN</button>
-				</form>
-				<br><br>
+            <button type="submit" id="button"
+                    class=" col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 btn btn-default">
+                LOGIN
+            </button>
+        </form>
+        <br><br>
 
-				<a><p onclick="clickRestore()"  align='center' class="marginText"><a id='headerRestore'>restore password</a></p>
-				<p class="marginText2 headerTwo" >calendar</p>
-				<!--<br><br><br>
-
-
-
-						<div class="row col-xs-12">
-
-							<a href="https://twitter.com/login?lang=ru" class="col-sm-2  col-xs-2 col-xs-offset-3 col-sm-offset-3  social twitter ">
-							</a>
-
-							<a href="https://www.facebook.com/" class="social facebook col-sm-2 col-xs-2  ">
-							</a>
-
-							<a href="https://www.reddit.com/" class="social reddit col-sm-2 col-xs-2 " >
-							</a>
-
-						</div></div>-->
-
-					</div>
-				</div>
-			</div>
+        <a><p onclick="clickRestore()" align='center' class="marginText"><a id='headerRestore'>restore password</a></p>
+            <p class="marginText2 headerTwo">calendar</p>
+            <!--<br><br><br>
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="C:\Users\Alexial\Desktop\side\js\bootstrap.min.js"></script>
-    <script src="login.js"></script>
-  </body>
-  </html>
+                    <div class="row col-xs-12">
+
+                        <a href="https://twitter.com/login?lang=ru" class="col-sm-2  col-xs-2 col-xs-offset-3 col-sm-offset-3  social twitter ">
+                        </a>
+
+                        <a href="https://www.facebook.com/" class="social facebook col-sm-2 col-xs-2  ">
+                        </a>
+
+                        <a href="https://www.reddit.com/" class="social reddit col-sm-2 col-xs-2 " >
+                        </a>
+
+                    </div></div>-->
+
+    </div>
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>
