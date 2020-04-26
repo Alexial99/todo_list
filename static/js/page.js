@@ -304,14 +304,16 @@ $(function(){
 
 		$('form').submit(function() {
 			//console.log($(this).serializeArray());
-			console.log($('#selected_day').html())
+			if($(this).serializeArray()[0].value===""){alert("Пожалуйста,заполните поле ввода заметки.");
+				$('#add_notes').trigger('click');}
+			else{console.log($('#selected_day').html())
 			CalendarNotes.push(new userNote("John",$('#selected_day').html(),$(this).serializeArray()[0],$(this).serializeArray()[1],$(this).serializeArray()[2]));
 			console.log(CalendarNotes[1]);
 			console.log($(this).serializeArray()[1]);
 			$('#calendar_note_text').val('');
 			$("[name='startTime']").val('');
 			$("[name='completionTime']").val('');
-			console.log($(CalendarNotes[1]));
+			console.log($(CalendarNotes[1]));}
 			return false;
 		});
 
