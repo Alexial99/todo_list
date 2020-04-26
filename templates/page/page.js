@@ -144,6 +144,7 @@ let CalendarNotes = [];
 			this.completionTime = completionTime;
 		}
 
+
 	function lalalal(){
 $(function(){
 		/*let CalendarNotes = [];
@@ -315,6 +316,7 @@ $(function(){
 			$("[name='completionTime']").val('');
 			console.log($(CalendarNotes[1]));}
 			return false;
+
 		});
 
 		$("#saving_notes").on("click", function(){
@@ -405,14 +407,12 @@ $(function(){
 			if(($(".headerOneOrig").length !=0)||($(".textActive").length !=0)){
 				$('.headerOne').removeClass('headerOneOrig');
 				$('.headerTwo').removeClass('headerTwoOrig');
-				$('#inputString').css('background-color','black');
 			}
 			else {
 				  $('.headerOne').addClass('headerOneOrig');
 				  $('.headerTwo').addClass('headerTwoOrig');
-				  $('#inputString').css('background-color','white');
-
 			}
+
 			if(($(this).attr('id') == 'SwitchOptionCosmo')&&($(".headerOneOrig").length ==0)){
 				$('.trajectoryOne, .trajectoryTwo, .trajectoryThree, .trajectoryFour').hide();
 			}
