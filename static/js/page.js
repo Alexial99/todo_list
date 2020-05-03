@@ -1,3 +1,4 @@
+
 "use strict";
 function createCalendar(elem, year, month) {
 	let mon;
@@ -197,75 +198,9 @@ $(function(){
 				$('#state_of_notes').html("");
 			}
 
-			$.each(CalendarNotes,function(index,element){
-				let dateAddThisNote;
-				$.each(this,function(key,value){
 
-					if(key=='dateAdd'){
-						dateAddThisNote = value;
-					}
-
-						if(key=='startTime'){
-
-						let noteTextValue =  element.noteText.value;
-						console.log(noteTextValue);
-						console.log(dateAddThisNote);
-
-						let date1=element.startTime.value;
-						if(this.value ==""){
-								date1=(dateAddThisNote);
-								date1=dateCorrection(date1);
-						}
-
-						let date2=element.completionTime.value;
-						if(element.completionTime.value==""){
-								date2=(dateAddThisNote);
-								date2=dateCorrection(date2);
-						}
-						function dateCorrection(time){
-							let arrDate =time.split(".");
-							let result = arrDate[2]+"."+ ((arrDate[1]))+"."+ arrDate[0];
-							return result;
-						}
-
-						let daysLong = Math.ceil((Date.parse(date2) - Date.parse(date1)) / (1000 * 3600 * 24));
-						if(daysLong<0){
-							let date3=date1;
-							date1=date2;
-							date2=date3;
-							if (((new Date(date2)).getHours())!=((new Date(date1)).getHours())){
-								date2=(new Date(date2)).getTime()+((new Date(date1)).getHours()*3600000);
-							}
-						}
-
-						let dateStart = new Date(date1);
-						console.log(dateStart);
-						let dateEnd =new Date(date2);//гдет пребавляютс 3 часа...я хз где..но эт фикс обратного отсчета
-						console.log(dateEnd);
-						let arrayInterval = [];
-
-						function pad(s){ return ('00' + s).slice(-2)}
-
-						while( dateStart.getTime() <= dateEnd.getTime()) {
-									  arrayInterval.push( '' + pad(dateStart.getDate()) +'.'+  pad(dateStart.getMonth()+1) +'.'+ dateStart.getFullYear() );
-									  dateStart.setDate(dateStart.getDate()+1);
-						}
-						console.log(arrayInterval);
-						$.each(arrayInterval,function(index,element){
-							if(element == $('#selected_day').html()){
-								if($('#state_of_notes').html()=="нет заметок"){
-									$('#state_of_notes').html(noteTextValue+"<br>");
-									//console.log(element.noteText.value);
-									$('#state_of_notes').css( {'overflow':'auto','height':'60px','padding':'10px'});
-								}
-								else{
-									$('#state_of_notes').append( noteTextValue+"<br>");
-								}
-							}
-						});
-					}
-				});
-			});
+					let	numberOfFunction = 1;
+						setArrayInterval(numberOfFunction);
 
 
 			if($('#state_of_notes').html()==""){
@@ -291,6 +226,103 @@ $(function(){
 });
 
 }
+
+function setArrayInterval(numberOfFunction){
+		$.each(CalendarNotes,function(index,element){
+				let dateAddThisNote;
+				$.each(this,function(key,value){
+
+					if(key=='dateAdd'){
+						dateAddThisNote = value;
+					}
+
+						if(key=='startTime'){
+
+						let noteTextValue =  element.noteText.value;
+
+						let date1=element.startTime.value;
+						if(this.value ==""){
+								date1=(dateAddThisNote);
+								date1=dateCorrection(date1);
+						}
+
+						let date2=element.completionTime.value;
+						if(element.completionTime.value==""){
+								date2=(dateAddThisNote);
+								date2=dateCorrection(date2);
+						}
+						function dateCorrection(time){
+							let arrDate =time.split(".");
+							let result = arrDate[2]+"."+ ((arrDate[1]))+"."+ arrDate[0];
+						//	console.log(result);
+							return result;
+						}
+
+						let daysLong = Math.ceil((Date.parse(date2) - Date.parse(date1)) / (1000 * 3600 * 24));
+
+						if(daysLong<0){
+							let date3=date1;
+							date1=date2;
+							date2=date3;
+
+						}
+						if (((new Date(date2)).getHours())!=((new Date(date1)).getHours())){
+								date2=(new Date(date2)).getTime()+((new Date(date1)).getHours()*3600000);
+							}
+
+
+						let dateStart = new Date(date1);
+						let dateEnd = new Date(date2);
+						console.log(dateStart);
+						console.log(dateEnd);
+						let arrayInterval = [];
+
+						function pad(s){ return ('00' + s).slice(-2)}
+
+						while( dateStart.getTime() <= dateEnd.getTime()) {
+									  arrayInterval.push( '' + pad(dateStart.getDate()) +'.'+ pad(dateStart.getMonth()+1) +'.'+ dateStart.getFullYear() );
+									  dateStart.setDate(dateStart.getDate()+1);
+						}
+
+						if(numberOfFunction==1){ $.each(arrayInterval,function(index,element){
+							if(element == $('#selected_day').html()){
+								if($('#state_of_notes').html()=="нет заметок"){
+									$('#state_of_notes').html(noteTextValue+"<br>");
+									//console.log(element.noteText.value);
+									$('#state_of_notes').css( {'overflow':'auto','height':'60px','padding':'10px'});
+								}
+								else{
+									$('#state_of_notes').append( noteTextValue+"<br>");
+								}
+							}
+						});
+					}
+					if(numberOfFunction==2){
+
+						let ind=index;
+						$.each(arrayInterval,function (index,element){
+
+
+						if(element == $('#selected_day').html()){ //value
+
+							$('#objectsToDelit').append( "<div class='js-notes-for-delite'>"+element+"<div class='js-notes-text'>"+noteTextValue+"</div>"+'<button class="removeThisNote" direction="'+ind+'"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+"</div>");
+
+						}
+
+
+
+					});
+
+					}//
+
+				}
+
+				});
+		});
+		console.log(CalendarNotes);
+
+}
+
 lalalal();
 
 
@@ -335,20 +367,21 @@ $(function(){
 		$('#removeNotes').on('click',function(){
 			$('#calendar_table, .notes_window, .nav').hide();
 			$('#notepadToDelete').show();
-			$.each(CalendarNotes,function (index,element){
-				$.each(this,function(key,value){
-					if(key =='dateAdd'){
-						if(value == $('#selected_day').html()){
-							$('#objectsToDelit').append( "<div class='js-notes-for-delite'>"+value+"<div class='js-notes-text'>"+ element.noteText.value+"</div>"+'<button class="removeThisNote" direction="'+index+'"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+"</div>");
 
-						}
-					}
-				});
 
-			});
+			let numberOfFunction=2;
+
+			setArrayInterval(numberOfFunction);
+
+
+
+
+
+
 			$('.removeThisNote').on('click',function(){
 			//console.log($(this).attr('direction'));
 			//console.log(CalendarNotes[$(this).attr('direction')]);
+			console.log(this);
 			CalendarNotes.splice([$(this).attr('direction')],1);
 			$('#objectsToDelit').html("");
 			$('#removeNotes').click();
@@ -362,18 +395,7 @@ $(function(){
 			$('#notepadToDelete').hide();
 			$('td').removeClass('active_notes_window');
 		});
-	/*	$('#monthSelection').on('click',function(){
-			$('#submenuMonth').slideToggle(500);
-		}); */
-/*		$('#backButton').on('click',function(){
 
-    		nowMonth -= 1;
-    		if(nowMonth < 0){
-    			nowYear -= 1;
-    			nowMonth = 11;
-			}
-			 createCalendar(calendar_table,nowYear, nowMonth);
-		}); */
 		$('#add').on('click',function(){
 			let val=$('#inputString').val();
 			if(val !==''){
